@@ -51,8 +51,8 @@ const Bio = () => {
         }}
       />
       <p>
-        Written by <strong>{author}</strong>. Probably writing coding somewhere
-        in Chicago/Taiwan.
+        Written by <strong>{author}</strong>. Probably writing & coding
+        somewhere in Chicago/Taiwan.
         {` `}
       </p>
     </div>
