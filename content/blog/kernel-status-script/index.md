@@ -43,3 +43,24 @@ And now I can see it in my status bar:
 
 I haven't figured out an _easy_ way to color the output of a custom command like
 this in xmobar (without dusting off my Haskell skills), but will update if I do.
+
+Update (2019-11-12): Arch changed the version string returned by `pacman --query
+linux` to no longer contain the word `arch`, so here's an updated script:
+
+```bash
+#!/bin/bash
+
+# e.g. linux 5.3.10.1-1
+[[ `pacman --query linux` =~ ^(.*)([0-9]+[0-9]?\.[0-9]+[0-9]?\.[0-9]+[0-9]?)(\.[0-9]+-[0-9]+)(.*)$ ]] && installed_kernel=${BASH_REMATCH[2]};
+
+# e.g. 5.3.10-arch1-1
+[[ `uname --kernel-release` =~ ^(.*)([0-9]+[0-9]?\.[0-9]+[0-9]?\.[0-9]+[0-9]?)(.*)$ ]] && running_kernel=${BASH_REMATCH[2]};
+
+if [[ "$running_kernel" != "$installed_kernel" ]];
+then
+  echo "Restart ($installed_kernel)"
+else
+  printf "OK ($running_kernel)"
+fi
+
+```
