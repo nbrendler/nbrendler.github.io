@@ -22,7 +22,7 @@ on a feature of Cargo.
 To remedy this I introduced the `signal-hook` crate with its very simple
 interface.
 
-```
+```rust
 use std::io::{BufRead, BufReader, Error, Write};
 use std::process::{Child, ChildStdin, ChildStdout, Command, Stdio};
 use std::sync::mpsc::{channel, Receiver, Sender, TryRecvError};
