@@ -5,7 +5,8 @@ description: A portfolio project I've been working on for a few weeks.
 tags: tech,javascript,preact,graphql
 ---
 
-I finally released a new project -- Annotato! It's a tool for reading source
+I finally released a new project --
+[Annotato](https://annotato.nikbrendler.com)! It's a tool for reading source
 code that has lots of comments, and was a collaboration with
 [@hyper_yolo](https://twitter.com/hyper_yolo). This post explains why I wrote
 the tool and the process.
