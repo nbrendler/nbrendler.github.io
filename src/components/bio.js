@@ -54,6 +54,9 @@ const Bio = () => {
         Written by <strong>{author}</strong>. Probably writing & coding
         somewhere in Chicago/Taiwan.
         {` `}
+        Follow him on <a href="https://github.com/nbrendler">GitHub</a>
+        {` `}
+        or <a href="https://twitter.com/NikBrendler">Twitter</a>.
       </p>
     </div>
   )

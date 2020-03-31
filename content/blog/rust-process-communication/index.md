@@ -3,7 +3,9 @@ title: "Dealing with long-lived child processes in Rust: Part 1"
 date: 2019-11-02T04:17:12Z
 description: Notes on dealing with child processes that I found a bit tricky or
   not documented well.
-tags: tech,rust
+tags:
+  - tech
+  - rust
 ---
 
 I've been writing a small program in Rust to fill a need I have with my current

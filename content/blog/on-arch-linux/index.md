@@ -1,11 +1,11 @@
 ---
 title: Developing on Arch Linux
 date: 2019-09-13T08:03:42Z
-description: My meme-free Arch Linux 'story' after 7 years of daily usage, along
-  with some tips on using Arch as a daily development environment and attempt to
-  answer the question, "Is this a Good Idea?"
+description: Thoughts after using Arch for daily development for seven years.
 
-tags: tech,arch linux
+tags:
+  - tech
+  - arch linux
 ---
 
 I've been using Arch as my main development environment since about 2012, and at

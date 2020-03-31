@@ -3,7 +3,9 @@ title: "Dealing with long-lived child processes in Rust: Part 2"
 date: 2019-12-27T04:13:27Z
 
 description: How to handle signals so that child processes get cleaned up.
-tags: tech,rust
+tags:
+  - tech
+  - rust
 ---
 
 In [part one](/rust-process-communication) I went over a few of the methods I

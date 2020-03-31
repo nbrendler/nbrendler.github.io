@@ -1,9 +1,10 @@
 ---
 title: Kernel status script
 date: 2019-09-23T04:02:43Z
-description: I often forget to restart after updating the kernel, so I wrote a
-  script to check the status and put it in xmobar config to remind me.
-tags: tech,arch linux
+description: A script to check if I need to reboot for kernel changes.
+tags:
+  - tech
+  - arch linux
 ---
 
 When developing on Arch Linux, kernel updates happen pretty frequently. For most

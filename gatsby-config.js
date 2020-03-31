@@ -1,11 +1,12 @@
 module.exports = {
   siteMetadata: {
-    title: `apropos of nothing`,
-    author: `Nikolai Brendler`,
+    title: `nikbrendler.com`,
+    author: `Nik Brendler`,
     description: `Musing and rambling about building stuff.`,
-    siteUrl: `https://nbrendler.github.io`,
+    siteUrl: `https://nikbrendler.com`,
     social: {
       github: `nbrendler`,
+      twitter: `NikBrendler`,
     },
   },
   plugins: [
@@ -14,6 +15,13 @@ module.exports = {
       options: {
         path: `${__dirname}/content/blog`,
         name: `blog`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/content/standalone`,
+        name: `standalone`,
       },
     },
     {
@@ -84,6 +92,7 @@ module.exports = {
             query: `
               {
                 allMarkdownRemark(
+                  filter: { frontmatter: { tags: { nin: "standalone" } } },
                   sort: { order: DESC, fields: [frontmatter___date] },
                 ) {
                   edges {
@@ -120,7 +129,7 @@ module.exports = {
         background_color: `#ffffff`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `content/assets/gatsby-icon.png`,
+        icon: `content/assets/site-icon.png`,
       },
     },
     `gatsby-plugin-offline`,

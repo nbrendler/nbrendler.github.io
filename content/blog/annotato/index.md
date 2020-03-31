@@ -2,7 +2,11 @@
 title: Introducing Annotato
 date: 2020-03-20T12:24:09Z
 description: A portfolio project I've been working on for a few weeks.
-tags: tech,javascript,preact,graphql
+tags:
+  - tech
+  - javascript
+  - preact
+  - graphql
 ---
 
 I finally released a new project --
@@ -11,7 +15,7 @@ code that has lots of comments, and was a collaboration with
 [@hyper_yolo](https://twitter.com/hyper_yolo). This post explains why I wrote
 the tool and the process.
 
-![Annotato](./annotato.png))
+![Annotato](./annotato.png)
 
 ## Motivation
 

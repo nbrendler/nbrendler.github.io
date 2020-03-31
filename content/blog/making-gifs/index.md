@@ -2,7 +2,9 @@
 title: Making quick & easy gifs for pull requests (Linux)
 date: 2019-09-14
 description: Quick quide on recording gifs from your screen in Linux.
-tags: tech,linux tools
+tags:
+  - tech
+  - linux tools
 ---
 
 I often like to make gifs for visual changes to software and include them in

@@ -1,8 +1,9 @@
 ---
 title: On productivity
 date: 2020-03-16T15:23:44Z
-description: Or, attempting to solve non-technical problems with technology.
-tags: tech
+description: Attempting to solve non-technical problems with technology.
+tags:
+  - tech
 ---
 
 Lately I've been struggling a bit to be productive. I've got lots of stuff I

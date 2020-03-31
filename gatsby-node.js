@@ -5,10 +5,28 @@ exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
 
   const blogPost = path.resolve(`./src/templates/blog-post.js`)
+  const markdownPage = path.resolve(`./src/templates/markdown-page.js`)
   const result = await graphql(
     `
       {
-        allMarkdownRemark(
+        standalone: allMarkdownRemark(
+          filter: { frontmatter: { tags: { in: "standalone" } } }
+          sort: { fields: [frontmatter___date], order: DESC }
+          limit: 1000
+        ) {
+          edges {
+            node {
+              fields {
+                slug
+              }
+              frontmatter {
+                title
+              }
+            }
+          }
+        }
+        posts: allMarkdownRemark(
+          filter: { frontmatter: { tags: { nin: "standalone" } } }
           sort: { fields: [frontmatter___date], order: DESC }
           limit: 1000
         ) {
@@ -31,8 +49,20 @@ exports.createPages = async ({ graphql, actions }) => {
     throw result.errors
   }
 
+  // Create standalone pages.
+  const standalonePages = result.data.standalone.edges
+  standalonePages.forEach((post, index) => {
+    createPage({
+      path: post.node.fields.slug,
+      component: markdownPage,
+      context: {
+        slug: post.node.fields.slug,
+      },
+    })
+  })
+
   // Create blog posts pages.
-  const posts = result.data.allMarkdownRemark.edges
+  const posts = result.data.posts.edges
 
   posts.forEach((post, index) => {
     const previous = index === posts.length - 1 ? null : posts[index + 1].node
