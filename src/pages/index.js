@@ -22,11 +22,19 @@ class BlogIndex extends React.Component {
               <header>
                 <h3
                   style={{
-                    marginBottom: 0,
+                    marginBottom: rhythm(1 / 3),
                     borderBottom: `1px solid rgba(0, 0, 0, 0.3)`,
                   }}
                 >
-                  {key}
+                  <span
+                    style={{
+                      backgroundImage: `linear-gradient(90deg, #f9b4d6, #ff9280)`,
+                      backgroundClip: `text`,
+                      color: `transparent`,
+                    }}
+                  >
+                    {key}
+                  </span>
                 </h3>
               </header>
               {entries.map(({ node }) => {

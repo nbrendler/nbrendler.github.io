@@ -25,34 +25,27 @@ const Layout = ({ location, title, children }) => {
   `)
   const rootPath = `${__PATH_PREFIX__}/`
 
-  const socialButtons = [
-    <a
+  const socialButtons = (
+    <div
       style={{
+        display: `flex`,
         flex: `0 1 auto`,
         alignSelf: `center`,
       }}
-      href="https://github.com/nbrendler"
     >
-      <Image
-        style={{ flex: `0 1 auto`, alignSelf: `center` }}
-        fixed={data.github.childImageSharp.fixed}
-      />
-    </a>,
-    <a
-      style={{
-        flex: `0 1 auto`,
-        alignSelf: `center`,
-      }}
-      href="https://twitter.com/NikBrendler"
-    >
-      <Image
-        style={{
-          marginLeft: rhythm(1 / 5),
-        }}
-        fixed={data.twitter.childImageSharp.fixed}
-      />
-    </a>,
-  ]
+      <a style={{ display: `flex` }} href="https://github.com/nbrendler">
+        <Image fixed={data.github.childImageSharp.fixed} />
+      </a>
+      <a style={{ display: `flex` }} href="https://twitter.com/NikBrendler">
+        <Image
+          style={{
+            marginLeft: rhythm(1 / 5),
+          }}
+          fixed={data.twitter.childImageSharp.fixed}
+        />
+      </a>
+    </div>
+  )
   let header
   let listItem = (path, name, root) => (
     <li style={{ float: `left`, marginBottom: 0 }}>
