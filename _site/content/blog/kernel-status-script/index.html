@@ -1,0 +1,46 @@
+<p>When developing on Arch Linux, kernel updates happen pretty frequently. For most
+things, this is fine and I can continue working. For some things, notably
+Docker, I need to reboot my machine after the kernel is updated. This probably
+depends on what storage driver you use and such, but currently I use overlayfs
+which is loaded by the kernel. You might be able to get away with just modprobe
+but I tend to just restart as it's quick and easy.</p>
+<p>To remind myself when this happens, I wrote this script:</p>
+<pre><code class="language-bash">#!/bin/bash
+
+[[ `pacman --query linux` =~ ^(.*)([0-9]+[0-9]?\.[0-9]+[0-9]?\.[0-9]+[0-9]?)(.*)$ ]] &amp;&amp; installed_kernel=${BASH_REMATCH[2]};
+
+[[ `uname --kernel-release` =~ ^(.*)([0-9]+[0-9]?\.[0-9]+[0-9]?\.[0-9]+[0-9]?)(.*)$ ]] &amp;&amp; running_kernel=${BASH_REMATCH[2]};
+
+if [[ &quot;$running_kernel&quot; != &quot;$installed_kernel&quot; ]];
+then
+  echo &quot;Restart ($installed_kernel)&quot;
+else
+  printf &quot;OK ($running_kernel)&quot;
+fi
+</code></pre>
+<p>This will print out <code>OK (5.3.1)</code> if my installed kernel matches the running one,
+or <code>Restart (5.3.1)</code> if my running kernel is older. Then I added the script to
+my path and call it in xmobar config like so:</p>
+<pre><code>Run Com &quot;kernelstatus&quot; [] &quot;kernel&quot; 1000
+</code></pre>
+<p>And now I can see it in my status bar:</p>
+<p><img src="./xmobar.png" alt="The kernel status"></p>
+<p>I haven't figured out an <em>easy</em> way to color the output of a custom command like
+this in xmobar (without dusting off my Haskell skills), but will update if I do.</p>
+<p>Update (2019-11-12): Arch changed the version string returned by <code>pacman --query linux</code> to no longer contain the word <code>arch</code>, so here's an updated script:</p>
+<pre><code class="language-bash">#!/bin/bash
+
+# e.g. linux 5.3.10.1-1
+[[ `pacman --query linux` =~ ^(.*)([0-9]+[0-9]?\.[0-9]+[0-9]?\.[0-9]+[0-9]?)(\.[0-9]+-[0-9]+)(.*)$ ]] &amp;&amp; installed_kernel=${BASH_REMATCH[2]};
+
+# e.g. 5.3.10-arch1-1
+[[ `uname --kernel-release` =~ ^(.*)([0-9]+[0-9]?\.[0-9]+[0-9]?\.[0-9]+[0-9]?)(.*)$ ]] &amp;&amp; running_kernel=${BASH_REMATCH[2]};
+
+if [[ &quot;$running_kernel&quot; != &quot;$installed_kernel&quot; ]];
+then
+  echo &quot;Restart ($installed_kernel)&quot;
+else
+  printf &quot;OK ($running_kernel)&quot;
+fi
+
+</code></pre>

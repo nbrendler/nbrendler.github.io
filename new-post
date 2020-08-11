@@ -6,13 +6,11 @@
 title=$@
 
 slug=$(echo "${title}" | iconv -t ascii//TRANSLIT | sed -r s/[^a-zA-Z0-9]+/-/g | sed -r s/^-+\|-+$//g | tr A-Z a-z)
-new_path="content/blog/${slug}"
+new_path="posts/${slug}.md"
 
-mkdir $new_path
-
-cat <<EOF > $new_path/index.md
+cat <<EOF > $new_path
 ---
-title: ${title}
+title: "${title}"
 date: $(date -u +%Y-%m-%dT%H:%M:%SZ)
 description: Post description
 tags:

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width-device-width, initial-scale=1.0">
+    <title>{{ renderData.title or title or metadata.title}}</title>
+    <meta name="description" content="{{ renderData.description or description or metadata.description }}">
+    <link rel="stylesheet" href="{{ '/css/typography.css' | url }}">
+    <link rel="stylesheet" href="{{ '/css/style.css' | url }}">
+    <link rel="stylesheet" href="https://unpkg.com/prismjs@1.21.0/themes/prism-okaidia.css">
+  </head>
+  <body>
+    <header class="blog-header">
+      <h3 class="home"><a class="title" href="{{ '/' | url }}">{{ metadata.title }}</a></h3>
+      <nav class="pages">
+        <a href="{{ '/projects/' | url }}">projects</a>
+      </nav>
+      <nav class="social">
+        <a href="{{ 'https://github.com/' + metadata.author.github | url }}">
+          <img src="{{ '/img/github.png' | url }}" />
+        </a>
+        <a href="{{ 'https://twitter.com/' + metadata.author.twitter | url }}">
+          <img src="{{ '/img/twitter.png' | url }}" />
+        </a>
+      </nav>
+    </header>
+    <main>
+    {{ content | safe }}
+    </main>
+  </body>
+</html>
