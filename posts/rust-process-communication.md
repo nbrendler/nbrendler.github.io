@@ -102,10 +102,8 @@ Here's the same thing, but now we're using a channel instead of a callback.
 ```rust
 use std::io::{BufRead, BufReader};
 use std::process::{Command, Stdio};
-use std::sync::mpsc::{channel, Sender, TryRecvError};
+use std::sync::mpsc::{channel, Sender};
 use std::thread;
-use std::thread::sleep;
-use std::time::Duration;
 
 fn start_listener(sender: Sender<String>) {
     let child = Command::new("ping")
@@ -134,25 +132,17 @@ fn main() {
     let (tx, rx) = channel();
     start_listener(tx);
 
-    loop {
-        match rx.try_recv() {
-            Ok(line) => {
-                println!("Got this back: {}", line);
-            }
-            Err(TryRecvError::Empty) => {
-                sleep(Duration::from_secs(1));
-                continue;
-            }
-            Err(e) => {
-                println!("Error: {:?}", e);
-                break;
-            }
-        }
-        }
+    for line in rx {
+        println!("Got this back: {}", line);
+    }
 
     println!("Done!");
 }
 ```
+
+> Update (2020-08-12): [@mezeipetister](https://twitter.com/mezeipetister)
+> pointed out we can just use the iterator provided by the channel to simplify
+> the main function here (and in the next example). Thanks!
 
 Note that this will run forever until you hit Ctrl-C, so our 'Done!' will never
 be reached. It is possible to use a timeout to get the same behavior as above,
@@ -179,7 +169,7 @@ child to send back to us.
 ```rust
 use std::io::{BufRead, BufReader, Write};
 use std::process::{Command, Stdio};
-use std::sync::mpsc::{channel, Receiver, Sender, TryRecvError};
+use std::sync::mpsc::{channel, Receiver, Sender};
 use std::sync::Mutex;
 
 use std::thread;
@@ -198,19 +188,8 @@ fn start_process(sender: Sender<String>, receiver: Receiver<String>) {
     thread::spawn(move || {
         let mut f = BufReader::new(child.stdout.unwrap());
         let mut stdin = child.stdin.unwrap();
-        loop {
-            match receiver.try_recv() {
-                Ok(line) => {
-                    stdin.write_all(line.as_bytes()).unwrap();
-                }
-                Err(TryRecvError::Empty) => {
-                    sleep(Duration::from_secs(1));
-                    continue;
-                }
-                Err(e) => {
-                    println!("Error: {:?}", e);
-                }
-            }
+        for line in receiver {
+            stdin.write_all(line.as_bytes()).unwrap();
             let mut buf = String::new();
             match f.read_line(&mut buf) {
                 Ok(_) => {
@@ -245,22 +224,9 @@ fn main() {
     tx2.send(String::from("Command 1\n")).unwrap();
     start_command_thread(Mutex::new(tx2));
 
-    loop {
-        match rx1.try_recv() {
-            Ok(line) => {
-                println!("Got this back: {}", line);
-            }
-            Err(TryRecvError::Empty) => {
-                sleep(Duration::from_secs(1));
-                continue;
-            }
-            Err(e) => {
-                println!("Error: {:?}", e);
-            }
-        }
+    for line in rx1 {
+        println!("Got this back: {}", line);
     }
-
-    println!("Done!");
 }
 ```
 
