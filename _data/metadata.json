@@ -1,9 +1,9 @@
 {
   "title": "nikbrendler.com",
   "url": "https://nikbrendler.com/",
-  "description": "My personal blog: tech, birdwatching, language study.",
+  "description": "My personal blog: tech, birdwatching, language learning.",
   "feed": {
-    "subtitle": "My personal blog: tech, birdwatching, language study.",
+    "subtitle": "My personal blog: tech, birdwatching, language learning.",
     "filename": "feed.xml",
     "path": "/feed/feed.xml",
     "id": "https://nikbrendler.com/"
