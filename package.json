@@ -4,6 +4,7 @@
   "description": "Nik Brendler's Blog",
   "main": "n/a",
   "scripts": {
+    "build": "eleventy",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
