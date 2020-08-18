@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="https://unpkg.com/prismjs@1.21.0/themes/prism-okaidia.css">
   </head>
   <body>
-    <header class="blog-header">
+    <header class="center">
       <h3 class="home"><a class="title" href="{{ '/' | url }}">{{ metadata.title }}</a></h3>
       <nav class="pages">
         <a href="{{ '/projects/' | url }}">projects</a>
@@ -34,7 +34,7 @@
         </a>
       </nav>
     </header>
-    <main>
+    <main class="center">
     {{ content | safe }}
     </main>
   </body>

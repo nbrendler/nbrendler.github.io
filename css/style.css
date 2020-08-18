@@ -1,25 +1,30 @@
-main,header {
-  max-width: 48rem;
-  margin: auto;
+.center {
+  box-sizing: content-box;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 80ch;
+  padding-left: 3rem;
+  padding-right: 3rem;
 }
+
+.center img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+header.center {
+  display: flex;
+}
+
 body {
   padding: 2.25rem 1.25rem;
-}
-@media(max-width: 40rem)
-main,header {
-  max-width: none;
 }
 
 ol {
   list-style: none;
   padding: 0;
   margin: 0;
-}
-
-.blog-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 1.53rem;
 }
 
 .home {

@@ -93,23 +93,26 @@ use std::cell::RefCell;
 type MaybeNode = Option<Rc<RefCell<TreeNode>>>;
 
 impl Solution {
-    pub fn is_same_tree(p: MaybeNode, q: MaybeNode) -> bool {
-        let mut stack = vec![];
-        stack.push((p, q));
-        while !stack.is_empty() {
-            // unwrapping is safe because of our while condition
-            let pair = stack.pop().unwrap();
-            match pair {
-                (Some(p), Some(q)) if p == q => {
-                    stack.push((p.borrow().left.clone(), q.borrow().left.clone()));
-                    stack.push((p.borrow().right.clone(), q.borrow().right.clone()));
-                },
-                (None, None) => {},
-                _ => { return false; }
-            }
-        }
-        true
-    }
+  pub fn is_same_tree(p: MaybeNode, q: MaybeNode) -> bool {
+      let mut stack = vec![];
+      stack.push((p, q));
+      while !stack.is_empty() {
+          // unwrapping is safe because of our while condition
+          let pair = stack.pop().unwrap();
+          match pair {
+              (Some(p), Some(q)) if p == q => {
+                  stack.push((p.borrow().left.clone(), q.borrow().left.clone()));
+                  stack
+                      .push((p.borrow().right.clone(), q.borrow().right.clone()));
+              }
+              (None, None) => {}
+              _ => {
+                  return false;
+              }
+          }
+      }
+      true
+  }
 }
 ```
 
@@ -136,7 +139,6 @@ match pair {
 That's looking better already. Do we really need to clone them?
 
 ``` rust
-
 match pair {
     (Some(p), Some(q)) if p == q => {
         let p = p.borrow();
@@ -147,15 +149,10 @@ match pair {
     (None, None) => {},
     _ => { return false; }
 }
+```
 
+```bash
 error[E0507]: cannot move out of dereference of `std::cell::Ref<'_, TreeNode>`
-  --> same-tree.rs:32:29
-   |
-32 |                 stack.push((p.borrow().left, q.borrow().left));
-   |                             ^^^^^^^^^^^^^^^
-   |                             |
-   |                             move occurs because value has type `std::option::Option<std::rc::Rc<std::cell::RefCell<TreeNode>>>`, which does not implement the `Copy` trait
-   |                             help: consider borrowing the `Option`'s content: `p.borrow().left.as_ref()`
 ```
 
 Right... I have to borrow it somehow.
@@ -171,18 +168,9 @@ match pair {
     (None, None) => {},
     _ => { return false; }
 }
-
+```
+```bash
 error[E0597]: `p` does not live long enough
-  --> same-tree.rs:34:30
-   |
-34 |                 stack.push((&p.left, &q.left));
-   |                              ^ borrowed value does not live long enough
-35 |                 stack.push((&p.right, &q.right));
-36 |             }
-   |             -
-   |             |
-   |             `p` dropped here while still borrowed
-   |             borrow might be used here, when `p` is dropped and runs the destructor for type `std::cell::Ref<'_, TreeNode>`
 ```
 
 No dice. Same thing if you try to `as_ref()` the `Option`s. The problem is our
@@ -328,7 +316,7 @@ freely store their references without the need for reference counting pointers.
 It's worth pointing out, too, that for simple use cases you can model trees with
 `Box<T>`. Boxes are more straightforward to work with but don't allow shared
 ownership, and won't work for general graphs that might have cycles (which can
-also cause problems for `Rc`!.
+also cause problems for `Rc`!).
 
 # More problems
 
