@@ -19,7 +19,8 @@
     <link rel="stylesheet" href="{{ '/css/style.css' | url }}">
     <link rel="stylesheet" href="https://unpkg.com/prismjs@1.21.0/themes/prism-okaidia.css">
   </head>
-  <body>
+  <body class="stack">
+    <div class="box">
     <header class="center">
       <h3 class="home"><a class="title" href="{{ '/' | url }}">{{ metadata.title }}</a></h3>
       <nav class="pages">
@@ -37,5 +38,6 @@
     <main class="center">
     {{ content | safe }}
     </main>
+    </div>
   </body>
 </html>

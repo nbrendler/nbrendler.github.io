@@ -1,3 +1,18 @@
+.stack {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.stack > * {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.stack > * + * {
+  margin-top: 1.5rem;
+}
+
 .center {
   box-sizing: content-box;
   margin-left: auto;
@@ -13,12 +28,13 @@
   margin-right: auto;
 }
 
-header.center {
-  display: flex;
+.box {
+  padding: 1.5rem;
 }
 
-body {
-  padding: 2.25rem 1.25rem;
+header.center {
+  display: flex;
+  margin-bottom: 1rem;
 }
 
 ol {
