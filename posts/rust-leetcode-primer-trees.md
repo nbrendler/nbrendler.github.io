@@ -1,7 +1,7 @@
 ---
 title: "Rust/Leetcode Primer: Trees"
 date: 2020-08-17T00:16:45Z
-description: Post description
+description: Notes on working with trees on leetcode using Rust.
 layout: layouts/post.njk
 tags:
   - tech
