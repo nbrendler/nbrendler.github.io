@@ -116,7 +116,7 @@ apple-picking"`.
 ## Use property-based testing
 
 It's a bit tricky for graph/tree problems, but for a large subset of problems on
-leetcode (those that deal with strings, or arrays of integers, for example). You
+leetcode (those that deal with strings, or arrays of integers, for example), you
 can get a lot of mileage out of property-based testing crates like
 [quickcheck](https://lib.rs/crates/quickcheck) to help with testing before
 submitting. More on this in a future post.
@@ -229,6 +229,17 @@ test result: FAILED. 8 passed; 2 failed; 0 ignored; 0 measured; 0 filtered out
 Armed with the line number, we can see that I forgot to check if the hashmap key
 exists before attempting to get the value.
 
+```rust
+// the key will only be set if the index (root) appears in an edge, so check for
+// None, too
+if adj.get(&root).is_none() || adj[&root].is_empty() {
+    if apples[root] && root != 0 {
+        return 2;
+    }
+    return 0;
+}
+```
+
 After fixing this, I was feeling pretty good and submitted my answer, but I was
 greeted by my old friend `Wrong Answer` (his partner in crime, `Time Limit
 Exceeded` hasn't been coming by as much since I switched from Python to Rust!). I
@@ -271,4 +282,8 @@ Success! Unfortunately, this was not the best or most efficient answer by a long
 shot (only beats 20%/20% on leetcode for CPU/memory). We can use a plain old
 array instead of a hashmap since the keys are just vertex indices. I think you
 can also skip the hashset entirely if you carefully construct the adjacency
-list.
+list. There's no shame in looking at other solutions to figure out how to
+optimize yours!
+
+Regardless, I've found this to be a nice template for solving the problems
+offline and will continue using it!
