@@ -1,6 +1,8 @@
 const syntaxHighlighting = require("@11ty/eleventy-plugin-syntaxhighlight")
+const inclusiveLanguage = require("@11ty/eleventy-plugin-inclusive-language")
 
 module.exports = function (eleventyConfig) {
+  eleventyConfig.addPlugin(inclusiveLanguage)
   eleventyConfig.addPlugin(syntaxHighlighting)
   eleventyConfig.setDataDeepMerge(true)
   eleventyConfig.addFilter("isoDate", isoDate)
