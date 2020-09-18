@@ -13,6 +13,7 @@ cat <<EOF > $new_path
 title: "${title}"
 date: $(date -u +%Y-%m-%dT%H:%M:%SZ)
 description: Post description
+layout: layouts/post.njk
 tags:
   - tech
 ---
