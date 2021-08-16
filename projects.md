@@ -4,7 +4,7 @@ layout: layouts/base.njk
 description: "Open source projects I made"
 ---
 
-### [Annotato](https://annotato.nikbrendler.com)
+### [Annotato](https://github.com/nbrendler/annotato)
 
 ![Annotato Screenshot](/img/annotato.png)
 
@@ -16,7 +16,7 @@ A tool for viewing source code. More info about the how/why is in [the blog post
 
 A TUI (terminal user interface) program for using Keybase chat. Written in Rust.
 
-### [AyyTeeGee](https://ayyteegee.nikbrendler.com)
+### [AyyTeeGee](https://github.com/nbrendler/ayyteegee)
 
 ![Screenshot of the game](/img/ayyteegee.png)
 
